@@ -3,6 +3,7 @@ const express = require('express');
 const hbs = require('hbs');
 const path = require('path');
 const PunkAPIWrapper = require('punkapi-javascript-wrapper');
+const { isTypedArray } = require('util/types');
 
 const app = express();
 const punkAPI = new PunkAPIWrapper();
@@ -22,8 +23,13 @@ app.get('/', (req, res) => {
   res.render('index');
 })
 
+const beers = punkAPI.getBeers({'abv_It' : 25})
+
 app.get('/beers', (req, res) => {
-  res.render('index')
+  beers.then(beersFromApi => 
+    res.render('beers')
+  )
+  .catch(error => console.log(error));
 })
 
 app.get('/randombeers', (req, res) => {
