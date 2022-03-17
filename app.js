@@ -15,8 +15,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Register the location for handlebars partials here:
 
-// ...
-
 // Add the route handlers here:
 
 app.get('/', (req, res) => {
@@ -39,10 +37,5 @@ app.get('/randombeers', (req, res) => {
     )
     .catch(error => console.log(error))
 })
-
-app.get('/randombeers', (req, res) => {
-  res.render('index')
-})
-
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'))
